@@ -1,0 +1,45 @@
+{%extends "base.html" %}
+{% block title %}Ruhava_produch-list{% endblock %}
+{%load static%}
+{% block extra_css %}
+  <link href="{%static 'shopkeeper.css'%}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+ <div class="container">
+   <div class="row">
+      {% for product in products %}
+         <div class="col-md-3">
+             <div class="card p-2 m-2">
+                {% with product.productimage_set.first as first_image %}
+                      {% if first_image %}
+                         <img src="{{ first_image.image.url }}" height="180px">
+                      {% endif %}
+                {% endwith %}
+                <h5>{{product.name}}</h5>
+                <p>Price: {{product.price}}</p>
+                {% if product.stock == 0 %}
+                  <p style="color:red;">Out of Stock</p>
+                {% else %}
+                  <p>Stock: {{ product.stock }}</p>
+                {% endif %}
+                 <!-- Dropdown Edit Menu -->
+                <div class="dropdown">
+                 <button class="btn btn-secondary dropdown-toggle"data-bs-toggle="dropdown">Edit</button>
+                 <ul class="dropdown-menu">
+                   <li>
+                     <a class="dropdown-item" href="{% url 'shopkeeper:product_update' product.id %}"> Update </a>
+                   </li>
+                   <li>
+                     <form method="POST" action="{% url 'shopkeeper:product_delete' product.id %}" onsubmit="return confirm('Delete product?')">
+                       {% csrf_token %}
+                         <button type="submit" class="dropdown-item">Delete </button>
+                     </form>
+                    </li>
+                 </ul>
+                </div>
+             </div>
+         </div>
+     {% endfor %}
+  </div>
+ </div>
+{%endblock%}

@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block title %}Ruhava{% endblock %}</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{%static 'styles.css'%}" rel="stylesheet" />
+        {% block extra_css %}{% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        
+    </head>
+<body>
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="{% url 'home'%}"><img src="{% static 'images/logo.png' %}" class="img-fluid" style="height:40px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">  Shop </a>
+                           <ul class="dropdown-menu">
+                               <li><a class="dropdown-item" href="{% url 'customer:items3' %}">All Products</a></li>
+                               <li><a class="dropdown-item" href="{% url 'customer:items' 'Men'%}">Men</a></li>
+                              <li><a class="dropdown-item" href="{% url 'customer:items' 'Women'%}">Women</a></li>
+                              <!-- <li><a class="dropdown-item" href="#">Kids</a></li> -->
+                            </ul>
+                        </li>
+                        <li class="nav-item nav-link">       
+                             {% if user.is_authenticated %}
+                              <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                               {% csrf_token %}
+                               <button type="submit" class="logout-btn">
+                               Logout </button>
+                              </form>     
+                            {% else %}
+                             <a href="{% url 'shop:register' %}" >
+                             Login  </a>
+                            {% endif %}                 
+                        </li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated and user.userprofile.login_as|lower == "shopkeeper" %}
+                               <li class="nav-item">
+                               <a class="nav-link" href="{% url 'shopkeeper:upload' %}">My store</a>
+                               </li>
+                            {% endif %}
+                        </li>                   
+                        <li class="nav-item"><a class="nav-link"></a></li>
+                    </ul>
+                    <a href="{% url 'customer:wishlist' %}" class="heart-icon"><i class="bi bi-heart"></i></a>
+                    <a href="{% url 'customer:cart' %}">
+                        <button class="btn" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                        </button> 
+                    </a>
+                    {% if user.is_authenticated %}
+                     <!-- Profile Circle -->
+                        <div class="profile-icon">
+                         {{ user.username|first|upper }}
+                        </div>
+                    {% endif%}
+                </div>
+            </div>
+     </nav>
+        {% if messages %}
+          <div id="toast-container">
+            {% for message in messages %}
+              <div class="ruhava-toast {{ message.tags }}">   {{ message }}   </div>
+           {% endfor %}
+          </div>
+       {% endif %}
+    {% block content %}
+
+    {% endblock %}
+    <footer><div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">About us</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>All india</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@ruhava.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-icons">
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-instagram"></i></a>     Instagram
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>    Facbook
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>       youtube
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-whatsapp"></i></a>      whatsapp
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Customer care</h4>
+                    <a class="btn btn-link" href="">Contact us</a>
+                    <a class="btn btn-link" href="">Shipping policy</a>
+                    <a class="btn btn-link" href="">Return & exchange</a>
+                    <a class="btn btn-link" href="">Track order</a>
+                    <a class="btn btn-link" href="">FAQ's</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Fashion updates</h4>
+                    <p>let's join Ruhava with your one click.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Ruhava</a>, All Right Reserved.
+
+                        <!--/* This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. */-->
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">Pooja kanwar</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div></footer>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'scripts.js' %}" defer></script> 
+   
+</body>
+</html>

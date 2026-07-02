@@ -1,0 +1,109 @@
+{%extends "base.html" %}
+{% block title %}Ruhava_homepage{% endblock %}
+{%load static%}
+     {% block content %}
+        <!-- Header -->
+         <header class="hero">
+                <div>
+                    <h1 class="display-4 fw-bolder">Shop in style</h1>
+                    <p class="fw-bold text-white-50 mb-0">With Ruhava </p>
+                </div>
+        </header> 
+       <br>
+     <div class="slider-container">
+      <div class="slider" id="cardSlider">
+        <div class="slide"><img src="{% static 'images/banner1.png' %}">
+         <div class="card-text"><h1>Elegance</h1>
+            <p>“ That speaks before you do.”</p></div>
+        </div>
+        <div class="slide"><img src="{% static 'images/banner2.png' %}">
+         <div class="card-text"><h1>Trends</h1>
+            <p>“ That find you first.”</p></div>
+        </div>
+        <div class="slide"><img src="{% static 'images/banner3.png' %}">
+         <div class="card-text"><h1>Not just fashion</h1>
+            <p>"— a statement.”</p></div>
+        </div>
+        <div class="slide"><img src="{% static 'images/banner4.png' %}">
+         <div class="card-text"><h1>Elegance</h1>
+            <p>“ That speaks before you do.”</p></div>
+        </div>
+        <div class="slide"><img src="{% static 'images/banner5.jpg' %}">
+         <div class="card-text"><h1>Trends</h1>
+            <p>" That find you first.”</p></div>
+        </div>
+      </div>
+     </div>
+     <br>
+     <div class="banner">
+        <hr>
+        <h1>FLAT 20% off </h1>
+        <h3>on your first order</h3>
+        <hr>
+     </div>
+        <!-- Section-->
+            <div class=" px-4 px-lg-5 mt-5">
+                <div class="row gx-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                   {% for category in categories %}
+                        <div class="card h-100 m-3 p-2 card-hover" style="max-width: 18rem;"> 
+    
+                         {% if category.image %}
+                         <img src="{{ category.image.url }}" class="card-img-top" style="height: 280px;">
+                         {% endif %}
+
+                         <div class="card-body text-center">
+                         <h3>{{ category.name }}</h3>
+                         <a href="{% url 'customer:items2' category.id %}"><button class="btn btn-primary">Explore</button></a>
+                         </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
+       
+     <section class="new-arrivals">
+     <h2 class="title">New Arrivals</h2>
+
+    <!-- JSON DATA -->
+     <script id="products-data" type="application/json">
+        {{ products_json|safe }}
+     </script>
+
+     <!-- Cards -->
+     <div class="card-container">
+        <div id="left-slot"></div>
+        <div id="right-slot"></div>
+     </div>
+   </section>
+   <section class="why-choose">
+    <h2>Why Choose Ruhava</h2>
+
+    <div class="features">
+
+        <div class="feature">
+            <h3>🚚 Fast Delivery</h3>
+            <p>Quick and reliable shipping</p>
+        </div>
+
+        <div class="feature">
+            <h3>🔒 Secure Payment</h3>
+            <p>100% safe transactions</p>
+        </div>
+
+        <div class="feature">
+            <h3>🔁 Easy Returns</h3>
+            <p>Hassle-free return policy</p>
+        </div>
+
+        <div class="feature">
+            <h3>💎 Premium Quality</h3>
+            <p>Carefully selected products</p>
+        </div>
+
+    </div>
+</section>
+    {% endblock %}
+
+    
+
+                

@@ -1,0 +1,26 @@
+{%extends "base.html" %}
+{% load static %}
+{% block title %}Ruhava_login{% endblock %}
+{% block extra_css %}
+           <link href="{%static 'shop.css'%}" rel="stylesheet" />
+         {% endblock %}
+{% block content %}
+
+ <form method="POST" class="login-container">
+   {% csrf_token %}
+   {% if error %}
+      <p style="color:red;">{{ error }}</p>
+   {% endif %}
+    <div class="login">
+      <h2>Login Page</h2> <hr><br>
+      <label>Username:</label>
+      <input type="text" name="username"><br><br>
+
+      <label>Password:</label>
+      <input type="password" name="password"><br><br>
+     
+      <button type="submit" class="btn btn-primary" onclick="">login</button>
+    </div>
+ </form>
+
+{% endblock %}

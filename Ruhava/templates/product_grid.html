@@ -1,0 +1,35 @@
+{%load static%}
+{% block extra_css %}
+           <link href="{%static 'customer.css'%}" rel="stylesheet" />
+{% endblock %}
+<div class="container">
+     <div class="row">
+         {% for product in products %}
+            <div class="col-md-3">
+                 <div class="card p-2 m-2 image-container">
+                 <!-- IMAGE LINK -->
+                  <a href="{% url 'customer:product_detail' product.id %}">
+                  {% with product.productimage_set.first as img %}
+                   {% if img %}
+                    <img src="{{ img.image.url }}" class="product-img">
+                   {% else %}
+                    <p>No image</p>
+                   {% endif %}
+                  {% endwith %}
+                 </a>
+                  <!-- HEART (OUTSIDE <a> !!! IMPORTANT) -->
+                  {% if user.is_authenticated %}
+                     {% if product.id in liked_products %}
+                         <a href="{% url 'customer:toggle_wishlist' product.id %}" class="heart-btn active">❤️</a>
+                     {% else %}
+                          <a href="{% url 'customer:toggle_wishlist' product.id %}" class="heart-btn">🤍</a>
+                     {% endif %}
+                  {% endif %}
+                   <hr>
+                  <h5>{{ product.name }}</h5>
+                  <p>₹ {{ product.price }}.00</p>
+               </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>

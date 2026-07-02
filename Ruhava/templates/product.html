@@ -1,0 +1,41 @@
+{%extends "base.html" %}
+{% block title %}Ruhava_product-list{% endblock %}
+{%load static%}
+{% block extra_css %}
+           <link href="{%static 'customer.css'%}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+<div class="container">
+     <div class="row">
+         {% for i in products %}
+            <div class="col-md-3">
+                 <div class="card p-2 m-2 image-container">
+                 <!-- IMAGE LINK -->
+                  <a href="{% url 'customer:product_detail' i.id %}">
+                  {% with i.productimage_set.first as img %}
+                   {% if img %}
+                    <img src="{{ img.image.url }}" class="product-img">
+                   {% else %}
+                    <p>No image</p>
+                   {% endif %}
+                  {% endwith %}
+                 </a>
+                  <!-- HEART (OUTSIDE <a> !!! IMPORTANT) -->
+                  {% if user.is_authenticated %}
+                     {% if i.id in liked_products %}
+                         <a href="{% url 'customer:toggle_wishlist' i.id %}" class="heart-btn active">❤️</a>
+                     {% else %}
+                          <a href="{% url 'customer:toggle_wishlist' i.id %}" class="heart-btn">🤍</a>
+                     {% endif %}
+                  {% endif %}
+                   <hr>
+                  <h5>{{ i.name }}</h5>
+                  <p>₹ {{ i.price }}.00</p>
+               </div>
+          </div>
+        {% endfor %}
+    </div>
+          </div>
+{% endblock %}    
+ 
+       

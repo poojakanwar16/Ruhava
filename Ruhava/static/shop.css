@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+/* Registration-page */ 
+.regis{
+  background-image: url(images/wp11076377.webp) ;
+  padding-block-end: 0%;
+  padding-bottom: 0%;
+  filter: blur(70%);
+}
+.regis-card{
+   background-color: white; 
+   border: 2px solid black; 
+}
+.step-icon {
+            font-size: 1.5rem;
+            margin-right: 8px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step-buttons {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 20px;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: attr(data-step);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: #fff;
+        }
+
+/* login-page */ 
+.login-container{
+    display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;
+    margin-top: 50px;
+} 
+.login{ 
+     border : 1px solid black;
+     text-align: center;
+     width: 300px;  
+     height: 300px;        /* fixed width */ 
+     border-radius : 15px;
+     box-shadow: 5px 5px 10px gray;
+     
+}   
+.login:hover{
+  transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}

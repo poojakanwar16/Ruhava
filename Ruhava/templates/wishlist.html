@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}wishlist{% endblock %}
+{% load static %}
+{% block extra_css %}
+    <link href="{%static 'customer.css'%}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+ <h2>My Wishlist</h2>
+<div class="container d-flex ">
+     {% for item in wishlist_items %}
+  <div class="p-3 m-2 image-container">
+    <div class="card ">
+        {% with item.product.productimage_set.first as img %}
+            <img src="{{ img.image.url }}"
+                 class="product_detail">
+                 {% if item.product.id in liked_ids %}
+                     <a href="{% url 'customer:toggle_wishlist' item.product.id %}" class="heart-btn active">❤️</a>
+                 {% else %}
+                     <a href="{% url 'customer:toggle_wishlist' item.product.id %}" class="heart-btn">♡</a>
+                 {% endif %}
+                 <hr>
+                 <h5>{{ item.product.name }}</h5>
+                  ₹ {{ item.product.price }}           
+       {% endwith %} 
+    </div>
+ </div>
+{% endfor %}    
+</div>
+{% endblock %} 

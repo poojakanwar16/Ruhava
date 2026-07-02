@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+       <link href="{% static 'order.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block title %}Review Order{% endblock %}
+{% block content %}
+
+<div class="review-container">
+  <h1 class="review-title">Review Your Order</h1>
+  <div class="customer-box">
+    <h3>Customer Information</h3>
+    <p><b>Name :</b> {{ customer.name }}</p>
+    <p><b>Phone :</b> {{ customer.phone }}</p>
+    <p><b>Address :</b> {{ customer.address }}</p>
+  </div>
+
+  {% for item in products %}
+    <div class="product-box">
+        <div class="product-row">
+             <div class="product-image">
+                  {% with item.product.productimage_set.first as img %}
+                     {% if img %}
+                            <img src="{{ img.image.url }}">
+                     {% endif %}
+                  {% endwith %}
+               </div>
+               <div class="product-details">
+                    <h4>{{ item.name }}</h4>
+                    <p><b>Size :</b> {{ item.size }}</p>
+                    <p><b>Quantity :</b> {{ item.quantity }}</p>
+                    <p><b>Price :</b> ₹{{ item.price }}</p>
+                </div>
+                <div class="price-box">
+                    <h4>₹{{ item.subtotal }}</h4>
+                </div>
+        </div>
+    </div>
+  {% endfor %}
+
+  <div class="product-box">
+    <div class="total-box">
+        <span>Grand Total</span>
+        <span>₹{{ total }}</span>
+    </div>
+    <div class="button-box">
+        <a href="{% url 'order:checkout' %}" class="back-btn">Back</a>
+        <a href="#" class="confirm-btn">Confirm Order</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

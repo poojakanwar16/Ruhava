@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %} 
+   <link href="{% static 'customer.css' %}" rel="stylesheet"/>
+{% endblock %}   
+{% block title %}Ruhava_cart-page{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Heading -->
+    <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap">
+        <div>
+            <h1 class="fw-bold mb-1">Your Cart</h1>
+            <p class="text-muted mb-0">
+                 item in your cart
+            </p>
+        </div>
+        <a href="{% url 'customer:items3' %}" class="btn btn-outline-dark rounded-pill px-4">
+            Continue Shopping
+        </a>
+    </div>
+
+
+    {% if products %}
+    <div class="row g-4">
+        <!-- LEFT SIDE -->
+        <div class="col-lg-8">
+            {% for item in products %}
+            <div class="cart-card mb-4">
+                <div class="row align-items-center">
+                    <!-- IMAGE -->
+                    <div class="col-md-3 text-center">
+
+                        {% with item.product.productimage_set.first as img %}
+
+                            {% if img and img.image %}
+                                <img src="{{ img.image.url }}"
+                                     class="img-fluid rounded cart-image">
+                            {% else %}
+                                <img src="{% static 'images/no-image.png' %}"
+                                     class="img-fluid rounded cart-image">
+                            {% endif %}
+
+                        {% endwith %}
+
+                    </div>
+
+                    <!-- DETAILS -->
+                    <div class="col-md-5 mt-3 mt-md-0">
+                        <h4 class="fw-bold">
+                          {{ item.product.name }}
+                        </h4>
+                        <h4 class="fw-bold">
+                            size -  {{item.size}}
+                        </h4>
+                        <p class="text-muted small mb-2">
+                            Premium Quality Product
+                        </p>
+
+                        <h5 class="fw-semibold text-dark">
+                            ₹{{item.subtotal }}
+                        </h5>
+                    </div>
+
+                    <!-- QUANTITY -->
+                    <div class="col-md-2 mt-4 mt-md-0 text-center">
+
+                        <div class="quantity-box">
+
+                            <a href="{% url 'customer:decrease_qty' item.key %}" class="qty-btn">-</a>
+
+                            <span class="mx-2 fw-semibold">
+                                {{ item.quantity }}
+                            </span>
+
+                            <a href="{% url 'customer:increase_qty' item.key %}" class="qty-btn">+</a>
+
+                        </div>
+
+                    </div>
+
+                    <!-- TOTAL -->
+                    <div class="col-md-2 mt-4 mt-md-0 text-center">
+
+                        <h5 class="fw-bold">
+                            ₹{{ item.product.price }}
+                        </h5>
+                        <a href="{% url 'customer:remove_from_cart' item.product.id %}"class="btn btn-danger">
+                           Remove
+                        </a>
+                       
+                        <div class="modal fade" id="removeModal{{ item.product.id }}" tabindex="-1">
+                           <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                          <h5 class="modal-title">Remove Product</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to remove this product from cart?
+                                </div>
+                               <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                   Cancel
+                                 </button>
+                                 <a href="{% url 'customer:remove_from_cart' item.product.id %}" class="btn btn-danger"> Remove </a>
+                           </div>
+                        </div>
+                   </div>
+                </div>
+    
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-4">
+
+            <div class="summary-card">
+
+                <h3 class="fw-bold mb-4">
+                    Order Summary
+                </h3>
+                {% for item in products %}
+<div class="d-flex justify-content-between mb-3">
+    <span>{{ item.product.name }}</span>
+    <span>₹{{ item.subtotal }}</span>
+</div>
+{% endfor %}
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Shipping</span>
+                    <span class="text-success">Free</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-4">
+                    <h5>Total</h5>
+                    <h5 class="fw-bold">₹{{total}}</h5>
+                </div>
+
+                <a href="{% url 'customer:checkout_from_cart' %}"class="btn btn-dark w-100 py-3 rounded-pill fw-semibold">
+                  Proceed to Checkout
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+    <!-- EMPTY CART -->
+    <div class="empty-cart text-center py-5">
+
+        <h2 class="fw-bold mb-3">
+            Your cart is empty
+        </h2>
+
+        <p class="text-muted mb-4">
+            Looks like you haven’t added anything yet.
+        </p>
+
+        <a href="{% url 'customer:items3' %}" class="btn btn-dark rounded-pill px-5 py-3">
+            Start Shopping
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{%extends "base.html" %}
+{% block title %}Ruhava_uploads{% endblock %}
+{%load static%}
+{% block extra_css %}
+           <link href="{%static 'shopkeeper.css'%}" rel="stylesheet" />
+         {% endblock %}
+        {% block content %}
+        <h2 style="text-align: center;"> Hello Shopkeeper {{ user.username }}👋</h2>
+<hr>
+<div class="Dashboard">
+    <div class="upload-card">
+        <a href="{% url 'shopkeeper:add' %}">
+           <h2> ➕ Add products</h2>
+           <hr>
+           <h5>you can upload your new products here.</h5>
+        </a>
+    </div>
+    <div class="upload-card">
+        <a href="{% url 'shopkeeper:product_list' %}">
+           <h2> 🛍️ See products</h2>
+           <hr>
+           <h5>you can see your uploaded products here.</h5>
+        </a>
+    </div>
+</div>     
+<div class="Dashboard">
+    <div class="upload-card">
+        <a href="{% url 'shopkeeper:upload'%}">
+           <h2>🛒 See orders</h2>
+           <hr>
+           <h5>you can chaek your customre's order here.</h5>
+        </a>
+    </div>
+    <div class="upload-card">
+        <a href="{% url 'shopkeeper:upload'%}">
+           <h2>ℹ️ See summary</h2>
+           <hr>
+           <h5>you can chaek your products summary here.</h5>
+        </a>
+    </div>
+</div>     
+{%endblock%}

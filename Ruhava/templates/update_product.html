@@ -1,0 +1,23 @@
+{%extends "base.html" %}
+{% block title %}Ruhava_produch-list{% endblock %}
+{%load static%}
+{% block extra_css %}
+  <link href="{%static 'shopkeeper.css'%}" rel="stylesheet" />
+{% endblock %}
+
+{%block content %}
+<form method="POST" enctype="multipart/form-data">
+ {% csrf_token %}
+  <h4>Current Images</h4>
+  <h4>Add More Images</h4>
+  <input type="file" name="images" multiple>
+  {% for img in product.productimage_set.all %}
+    <img src="{{ img.image.url }}" width="120">
+     <a href="{% url 'shopkeeper:delete_image' img.id %}"
+           onclick="return confirm('Delete this image?')">Delete
+        </a>
+   {% endfor %}
+  {{ form.as_p }}
+  <button type="submit" value="Update" btn-primary>Update</button>
+</form>
+{% endblock %}

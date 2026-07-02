@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Ruhava_AboutPage{% endblock %}
+{%load static%}
+     {% block content %}
+     <section class="container mt-3">
+    <div class="text-center">
+        <h1>About Us</h1>
+        <p class="text-muted">Learn more about our platform</p>
+    </div>
+
+    <div class="row mt-4">
+            <h3>Who We Are</h3>
+            <p>
+                We provide a platform where customers can explore products from multiple shopkeepers.
+                Our system allows easy browsing based on categories like Men, Women, and Kids.
+            </p>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <img src="{% static 'images/shopkeeper.png' %}" alt="shopkeeper-img" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <br>
+            <h3>✔ Our Mission</h3>
+            <p>Our goal is to simplify online shopping and help small shopkeepers reach more customers.</p>
+            <h3>✔ Empowering Shopkeepers</h3>
+            <p>Helping local sellers take their business online and reach more customers with ease.</p>
+            <!-- <h3>✔For Shopkeepers</h3>
+            <p>Manage products, connect with customers, and grow your business digitally.</p> -->
+            <h3>✔Grow Your Business</h3>
+            <p>A simple way for shopkeepers to expand beyond their local market.</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6"><br><br>
+            <h3>✔Easy Shopping Experience</h3>
+            <p>Discover products from local shops and enjoy seamless online shopping.</p>
+            <h3>✔For Customers</h3>
+            <p>Browse, choose, and shop from trusted local sellers anytime.Explore, compare, and shop easily from multiple sellers in one platform.</p>
+            <h3>✔Shop Smarter</h3>
+            <p>Find quality products from nearby shopkeepers in just a few clicks.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'images/customer.png' %}" alt="customer-img" class="img-fluid">
+        </div>
+    </div>        
+    <!-- <div class="mt-5">
+        <h3>Features</h3>
+        <ul>
+            <li>✔ Gender-based product filtering</li>
+            <li>✔ Multiple shopkeeper support</li>
+            <li>✔ Easy product management</li>
+        </ul>
+    </div> -->
+</section>
+<h2 class="title new-arrivals">what people say </h2>
+
+<hr class="title">
+
+<div class="testimonials">
+
+    {% for t in testimonials %}
+        <div class="box {% if forloop.counter0|divisibleby:2 %}left{% else %}right{% endif %}">
+            <h3>{{ t.msg }}</h3>
+            <h4>written by...{{ t.user.username }}</h4>
+        </div>
+    {% endfor %}
+
+</div>
+{% if testimonials.has_next %}
+    <div style="text-align:center; margin-top:20px;">
+        <a href="?page={{ testimonials.next_page_number }}" class="load-btn">
+            Load More
+        </a>
+    </div>
+{% endif %}
+
+<div class="add-feedback">
+    <h2>Add Yours ✨</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="msg" placeholder="Write your feedback..." required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+     {% endblock %}

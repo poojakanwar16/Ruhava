@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/* upload */
+.Dashboard{
+          display: flex;
+          gap : 150px;
+          margin: 50px;
+          justify-content: center;
+          text-align: center;
+}
+ .upload-card {
+    color: black;
+    border : 2px solid black;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 5px 5px 10px gray; 
+    width: 300px; 
+}
+.upload-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+} 
+/* 
+.product-img {
+    height: 250px;       
+    width: 100%;
+    object-fit: cover;   
+}
+.image-container {
+    position: relative;
+} */
