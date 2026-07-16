@@ -1,0 +1,1 @@
+web: gunicorn Ruhava.wsgi:application
