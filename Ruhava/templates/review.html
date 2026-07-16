@@ -38,14 +38,135 @@
     </div>
   {% endfor %}
 
-  <div class="product-box">
+  
+
+<div class="payment-container">
+
+    <h1>Select Payment Method</h1>
+
+    <p class="subtitle">
+        Currently only Cash on Delivery is available.
+    </p>
+
+    <!-- Available -->
+
+    <div class="payment-card active">
+
+        <div class="radio">
+            <div class="dot"></div>
+        </div>
+
+        <div class="payment-icon">
+            💵
+        </div>
+
+        <div class="payment-info">
+            <h3>Cash On Delivery</h3>
+            <p>Pay when your order arrives.</p>
+        </div>
+
+        <div class="available">
+            Available
+        </div>
+
+    </div>
+
+    <!-- UPI -->
+
+    <div class="payment-card disabled">
+
+        <div class="radio empty"></div>
+
+        <div class="payment-icon">
+            📱
+        </div>
+
+        <div class="payment-info">
+            <h3>UPI</h3>
+            <p>Google Pay, PhonePe, Paytm</p>
+        </div>
+
+        <div class="coming">
+            Coming Soon
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="payment-card disabled">
+
+        <div class="radio empty"></div>
+
+        <div class="payment-icon">
+            💳
+        </div>
+
+        <div class="payment-info">
+            <h3>Credit / Debit Card</h3>
+            <p>Visa • Mastercard • RuPay</p>
+        </div>
+
+        <div class="coming">
+            Coming Soon
+        </div>
+
+    </div>
+
+    <!-- Net Banking -->
+
+    <div class="payment-card disabled">
+
+        <div class="radio empty"></div>
+
+        <div class="payment-icon">
+            🏦
+        </div>
+
+        <div class="payment-info">
+            <h3>Net Banking</h3>
+            <p>All major banks</p>
+        </div>
+
+        <div class="coming">
+            Coming Soon
+        </div>
+
+    </div>
+
+    <!-- Wallet -->
+
+    <div class="payment-card disabled">
+
+        <div class="radio empty"></div>
+
+        <div class="payment-icon">
+            👛
+        </div>
+
+        <div class="payment-info">
+            <h3>Wallet</h3>
+            <p>Amazon Pay, Mobikwik etc.</p>
+        </div>
+
+        <div class="coming">
+            Coming Soon
+        </div>
+    </div>
+</div>
+<div class="product-box">
     <div class="total-box">
         <span>Grand Total</span>
         <span>₹{{ total }}</span>
     </div>
     <div class="button-box">
         <a href="{% url 'order:checkout' %}" class="back-btn">Back</a>
-        <a href="#" class="confirm-btn">Confirm Order</a>
+        <form method="POST" action="{% url 'order:place_order' %}">
+           {% csrf_token %}
+             <button type="submit" class="confirm-btn">
+                Confirm Order
+             </button>
+        </form>
     </div>
   </div>
 </div>

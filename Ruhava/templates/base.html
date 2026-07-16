@@ -65,9 +65,9 @@
                     </a>
                     {% if user.is_authenticated %}
                      <!-- Profile Circle -->
-                        <div class="profile-icon">
+                        <a href="{% url 'order:my_orders' %}"><div class="profile-icon">
                          {{ user.username|first|upper }}
-                        </div>
+                        </div></a>
                     {% endif%}
                 </div>
             </div>

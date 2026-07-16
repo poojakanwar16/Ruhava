@@ -6,7 +6,41 @@ from .models import Category
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from order.models import OrderItem
+from order.models import Order
+from django.contrib import messages
 app_name = "shopkeeper"
+
+def shopkeeper_orders(request):
+
+    if request.method == "POST":
+
+        order_id = request.POST.get("order_id")
+        status = request.POST.get("status")
+
+        order = get_object_or_404(Order, id=order_id)
+
+        if order.status == "delivered":
+            messages.error(request, "This order has already been delivered.")
+            return redirect("shopkeeper:orders")
+
+        order.status = status
+        order.save()
+
+    orders = OrderItem.objects.filter(
+        shopkeeper=request.user
+    ).select_related(
+        "order",
+        "product"
+    ).order_by("-order__created_at")
+
+    return render(
+        request,
+        "shopkeeper_orders.html",
+        {
+            "orders": orders
+        }
+    )
 # @login_required
 def product_view(request):
     categories = Category.objects.all() 

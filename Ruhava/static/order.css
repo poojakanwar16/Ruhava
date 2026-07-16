@@ -235,3 +235,597 @@ text-align:center;
 }
 
 }
+
+/* customer-order-page */
+.orders-container{
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+}
+
+.order-card{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.order-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.order-left{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.order-image img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.order-info h3{
+    margin-bottom:15px;
+}
+
+.order-info p{
+    margin:8px 0;
+    color:#555;
+}
+
+.order-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:20px;
+}
+
+.status-badge{
+    color:white;
+    padding:8px 16px;
+    border-radius:25px;
+    font-weight:bold;
+}
+.status-pending{
+    background:#ff9800;
+}
+
+.status-confirmed{
+    background:#2196f3;
+}
+
+.status-preparing{
+    background:#9c27b0;
+}
+
+.status-out_for_delivery{
+    background:#4caf50;
+}
+
+.status-delivered{
+    background:#2e7d32;
+}
+
+.status-cancelled{
+    background:#e53935;
+}
+.view-btn{
+    background:black;
+    color:white;
+    padding:10px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#333;
+}
+@media(max-width:768px){
+
+.order-card{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.order-left{
+    flex-direction:column;
+}
+
+.order-right{
+    width:100%;
+    margin-top:20px;
+    align-items:flex-start;
+}
+
+.order-image img{
+    width:100%;
+    max-width:220px;
+    height:auto;
+}
+
+}
+/*==================================================
+                ORDER DETAILS
+==================================================*/
+
+.details-container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+    padding-bottom:40px;
+}
+
+/*================ BACK BUTTON =================*/
+
+.back-btn{
+    display:inline-block;
+    margin-bottom:25px;
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    color:#000;
+    transform:translateX(-4px);
+}
+
+/*================ SUMMARY =================*/
+
+.summary-card2{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.summary-left h1{
+    font-size:34px;
+    margin-bottom:20px;
+}
+
+.order-date{
+    display:flex;
+    gap:60px;
+}
+
+.order-date span{
+    color:#777;
+    font-size:14px;
+}
+
+.order-date h4{
+    margin-top:5px;
+    font-size:18px;
+}
+
+.status-badge{
+    padding:12px 25px;
+    border-radius:30px;
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.status-pending{
+    background:#ff9800;
+}
+
+.status-confirmed{
+    background:#2196F3;
+}
+
+.status-preparing{
+    background:#9C27B0;
+}
+
+.status-out_for_delivery{
+    background:#4CAF50;
+}
+
+.status-delivered{
+    background:#2E7D32;
+}
+
+.status-cancelled{
+    background:#d32f2f;
+}
+
+/*================ TRACKER =================*/
+
+.tracker-card{
+    background:white;
+    margin-top:35px;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.tracker{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.track-item{
+    width:120px;
+    text-align:center;
+}
+
+.track-circle{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:3px solid #d0d0d0;
+    background:white;
+    color:#888;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    font-weight:bold;
+    font-size:18px;
+    transition:.3s;
+}
+
+.track-item span{
+    display:block;
+    margin-top:12px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.track-line{
+    flex:1;
+    height:4px;
+    background:#d8d8d8;
+    margin:0 8px;
+}
+
+.completed .track-circle{
+    background:#4CAF50;
+    border-color:#4CAF50;
+    color:white;
+}
+
+.filled{
+    background:#4CAF50;
+}
+
+/*================ TITLE =================*/
+
+.section-title{
+    margin:40px 0 20px;
+    font-size:28px;
+}
+
+/*================ PRODUCT CARD =================*/
+
+.product-card{
+    background:white;
+    display:flex;
+    align-items:center;
+    gap:25px;
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:22px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.product-image img{
+    width:150px;
+    height:150px;
+    border-radius:15px;
+    object-fit:cover;
+    transition:.3s;
+}
+
+.product-card:hover img{
+    transform:scale(1.05);
+}
+
+.product-info{
+    flex:1;
+}
+
+.product-info h3{
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.product-info p{
+    margin:8px 0;
+    color:#666;
+}
+
+.product-price{
+    font-size:30px;
+    font-weight:bold;
+}
+
+/*================ TOTAL =================*/
+
+.total-card{
+    background:#111;
+    color:white;
+    padding:25px 30px;
+    border-radius:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:35px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+/*================ BUTTON =================*/
+
+.action-box{
+    text-align:center;
+    margin-top:40px;
+}
+
+.confirm-btn{
+    display:inline-block;
+    background:#111;
+    color:white;
+    text-decoration:none;
+    padding:15px 40px;
+    border-radius:10px;
+    font-size:17px;
+    transition:.3s;
+}
+
+.confirm-btn:hover{
+    background:#333;
+    transform:translateY(-3px);
+}
+
+.delivered-box{
+    margin-top:40px;
+    text-align:center;
+    font-size:22px;
+    color:#2E7D32;
+    font-weight:bold;
+}
+
+/*================ MOBILE =================*/
+
+@media(max-width:900px){
+
+.summary-card{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:25px;
+}
+
+.order-date{
+    flex-direction:column;
+    gap:20px;
+}
+
+.tracker{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.track-line{
+    width:4px;
+    height:35px;
+    margin-left:20px;
+}
+
+.track-item{
+    width:auto;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-align:left;
+}
+
+.track-item span{
+    margin:0;
+}
+
+.product-card{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.product-image img{
+    width:100%;
+    height:auto;
+}
+
+.product-price{
+    font-size:24px;
+}
+
+.total-card{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+}
+
+}
+
+/* payment */
+
+.payment-container{
+
+    width:90%;
+    max-width:700px;
+    margin:50px auto;
+
+}
+
+.payment-container h1{
+
+    text-align:center;
+    margin-bottom:10px;
+    font-size:34px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+    color:#777;
+    margin-bottom:40px;
+
+}
+
+.payment-card{
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    background:white;
+
+    padding:22px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.payment-card.active{
+
+    border:2px solid black;
+
+}
+
+.payment-card.disabled{
+
+    filter:blur(1.5px);
+
+    opacity:.65;
+
+    pointer-events:none;
+
+}
+
+.payment-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.radio{
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    border:2px solid black;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.dot{
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:black;
+
+}
+
+.empty{
+
+    border-color:#888;
+
+}
+
+.payment-icon{
+
+    font-size:35px;
+
+}
+
+.payment-info{
+
+    flex:1;
+
+}
+
+.payment-info h3{
+
+    margin-bottom:6px;
+
+}
+
+.payment-info p{
+
+    color:#666;
+
+}
+
+.available{
+
+    color:green;
+
+    font-weight:bold;
+
+}
+
+.coming{
+
+    color:red;
+
+    font-weight:bold;
+
+}
+
+@media(max-width:700px){
+
+.payment-card{
+
+    flex-wrap:wrap;
+
+}
+
+.payment-container h1{
+
+    font-size:28px;
+
+}
+
+}

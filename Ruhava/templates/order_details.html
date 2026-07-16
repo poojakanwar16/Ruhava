@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Order Details{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'order.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="details-container">
+
+    <a href="{% url 'order:my_orders' %}" class="back-btn">
+        ← Back to My Orders
+    </a>
+
+    <!-- ================= ORDER SUMMARY ================= -->
+
+    <div class="summary-card2">
+
+        <div class="summary-left">
+
+            <h1>Order #{{ order.id }}</h1>
+
+            <div class="order-date">
+
+                <div>
+                    <span>Ordered On</span>
+                    <h4>{{ order.created_at|date:"d M Y" }}</h4>
+                </div>
+
+                <div>
+                    <span>Expected Delivery</span>
+                    <h4>{{ order.estimated_delivery|date:"d M Y" }}</h4>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="summary-right">
+
+            <span class="status-badge status-{{ order.status }}">
+                {{ order.get_status_display }}
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ================= TRACKER ================= -->
+
+    <div class="tracker-card">
+
+        <div class="tracker">
+
+            <div class="track-item {% if order.status == 'pending' or order.status == 'confirmed' or order.status == 'preparing' or order.status == 'out_for_delivery' or order.status == 'delivered' %}completed{% endif %}">
+                <div class="track-circle">
+                    {% if order.status == 'pending' %}
+                        1
+                    {% else %}
+                        ✓
+                    {% endif %}
+                </div>
+                <span>Pending</span>
+            </div>
+
+            <div class="track-line {% if order.status != 'pending' %}filled{% endif %}"></div>
+
+            <div class="track-item {% if order.status == 'confirmed' or order.status == 'preparing' or order.status == 'out_for_delivery' or order.status == 'delivered' %}completed{% endif %}">
+                <div class="track-circle">
+                    {% if order.status == 'confirmed' %}
+                        2
+                    {% elif order.status == 'preparing' or order.status == 'out_for_delivery' or order.status == 'delivered' %}
+                        ✓
+                    {% else %}
+                        2
+                    {% endif %}
+                </div>
+                <span>Confirmed</span>
+            </div>
+
+            <div class="track-line {% if order.status == 'preparing' or order.status == 'out_for_delivery' or order.status == 'delivered' %}filled{% endif %}"></div>
+
+            <div class="track-item {% if order.status == 'preparing' or order.status == 'out_for_delivery' or order.status == 'delivered' %}completed{% endif %}">
+                <div class="track-circle">
+                    {% if order.status == 'preparing' %}
+                        3
+                    {% elif order.status == 'out_for_delivery' or order.status == 'delivered' %}
+                        ✓
+                    {% else %}
+                        3
+                    {% endif %}
+                </div>
+                <span>Preparing</span>
+            </div>
+
+            <div class="track-line {% if order.status == 'out_for_delivery' or order.status == 'delivered' %}filled{% endif %}"></div>
+
+            <div class="track-item {% if order.status == 'out_for_delivery' or order.status == 'delivered' %}completed{% endif %}">
+                <div class="track-circle">
+                    {% if order.status == 'out_for_delivery' %}
+                        4
+                    {% elif order.status == 'delivered' %}
+                        ✓
+                    {% else %}
+                        4
+                    {% endif %}
+                </div>
+                <span>Out For Delivery</span>
+            </div>
+
+            <div class="track-line {% if order.status == 'delivered' %}filled{% endif %}"></div>
+
+            <div class="track-item {% if order.status == 'delivered' %}completed{% endif %}">
+                <div class="track-circle">
+                    {% if order.status == 'delivered' %}
+                        ✓
+                    {% else %}
+                        5
+                    {% endif %}
+                </div>
+                <span>Delivered</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <h2 class="section-title">
+        Products
+    </h2>
+
+    {% for item in items %}
+
+    <div class="product-card">
+
+        <div class="product-image">
+
+            {% with item.product.productimage_set.first as img %}
+
+                {% if img %}
+                    <img src="{{ img.image.url }}">
+                {% else %}
+                    <img src="{% static 'images/no-image.png' %}">
+                {% endif %}
+
+            {% endwith %}
+
+        </div>
+
+        <div class="product-info">
+
+            <h3>{{ item.product.name }}</h3>
+
+            <p>
+                <strong>Size :</strong>
+                {{ item.size }}
+            </p>
+
+            <p>
+                <strong>Quantity :</strong>
+                {{ item.quantity }}
+            </p>
+
+        </div>
+
+        <div class="product-price">
+
+            ₹{{ item.subtotal }}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    <!-- ================= TOTAL ================= -->
+
+    <div class="total-card">
+
+        <span>Grand Total</span>
+
+        <span>₹{{ order.total_amount }}</span>
+
+    </div>
+
+    <!-- ================= ACTION BUTTON ================= -->
+
+    {% if order.status == "out_for_delivery" %}
+
+    <div class="action-box">
+
+        <a href="{% url 'order:confirm_delivery' order.id %}" class="confirm-btn">
+
+            ✔ Confirm Delivery
+
+        </a>
+
+    </div>
+
+    {% elif order.status == "delivered" %}
+
+    <div class="delivered-box">
+
+        ✔ Delivered Successfully
+
+        {% if order.delivered_at %}
+            <br>
+            {{ order.delivered_at|date:"d M Y" }}
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

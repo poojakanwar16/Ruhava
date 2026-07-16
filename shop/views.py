@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 import random
 from django.utils import timezone
+from django.conf import settings
+from django.core.mail import send_mail
 
 def register_view(request):
 
@@ -45,8 +47,18 @@ def register_view(request):
             "otp": otp,
         }
 
-        # TODO: Send OTP to phone
-        print("OTP:", otp)
+        # Send OTP to phone
+        try:
+         send_mail(
+        "Your OTP Verification",
+        f"Your OTP is {otp}. It is valid for 5 minutes.",
+        settings.EMAIL_HOST_USER,
+        [email],
+        fail_silently=False,
+    )
+        except Exception:
+           messages.error(request, "Unable to send OTP. Please try again.")
+           return redirect("shop:register")
 
         return redirect("shop:verify_otp")
 

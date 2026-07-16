@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'order.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="orders-container"></div>
+ <h1>My Orders</h1>
+ {% if orders_data %}
+    {% for item in orders_data %}
+         <div class="order-card">
+             <div class="order-left">
+                 <div class="order-image">
+                     {% if item.image %}
+                       <img src="{{ item.image }}" alt="Product Image">
+                     {% else %}
+                          <img src="{% static 'images/no-image.png' %}" alt="No Image">
+                     {% endif %}
+                 </div>
+                 <div class="order-info">
+                     <h3>Order id #{{ item.order.id }}</h3>
+                     <p>📅 <strong>Ordered:</strong>
+                      {{ item.order.created_at|date:"d M Y" }}
+                       </p>
+
+                       <p>🚚 <strong>Delivery:</strong>
+                         {{ item.order.estimated_delivery|date:"d M Y" }}
+                       </p>
+
+                         <p>💰 <strong>Total:</strong>
+                           ₹{{ item.order.total_amount }}
+                         </p>
+                   </div>
+              </div>
+             <div class="order-right">
+                   <span class="status-badge status-{{ item.order.status }}">
+                     {{ item.order.get_status_display }}
+                  </span>
+                     <a href="{% url 'order:order_details' item.order.id %}" class="view-btn"> View Details →</a>
+             </div>
+          </div>
+    {% endfor %}
+ {% else %}
+    <h2>No Orders Yet</h2>
+    <a href="{% url 'home' %}">Shop Now</a>
+{% endif %}
+
+{% endblock %}

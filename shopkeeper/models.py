@@ -12,8 +12,6 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"    #django by default convert into plural so it was looking categorys which is wrong
 
-
-
 class Product(models.Model):
     owner = models.ForeignKey( settings.AUTH_USER_MODEL, on_delete=models.CASCADE )
     GENDER_CHOICES = [

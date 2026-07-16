@@ -30,3 +30,93 @@
 .image-container {
     position: relative;
 } */
+
+.orders-container{
+    width:90%;
+    margin:40px auto;
+}
+
+.page-title{
+    margin-bottom:30px;
+    font-size:35px;
+    font-weight:bold;
+}
+
+.order-card{
+    background:white;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+    margin-bottom:40px;
+    overflow:hidden;
+}
+
+.order-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#111827;
+    color:white;
+    padding:20px 30px;
+}
+
+.status{
+    background:#facc15;
+    color:black;
+    padding:8px 18px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.customer-box{
+    padding:25px 30px;
+    border-bottom:1px solid #ddd;
+}
+
+.product-box{
+    display:flex;
+    gap:25px;
+    padding:30px;
+}
+
+.product-image img{
+    width:170px;
+    height:170px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.product-details{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:10px;
+}
+
+.status-box{
+    padding:25px 30px;
+    border-top:1px solid #ddd;
+}
+
+.status-box form{
+    display:flex;
+    gap:20px;
+}
+
+.status-box select{
+    padding:12px;
+    width:220px;
+    border-radius:8px;
+}
+
+.update-btn{
+    background:black;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.update-btn:hover{
+    background:#333;
+}
