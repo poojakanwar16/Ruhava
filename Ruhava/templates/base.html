@@ -65,6 +65,7 @@
                     </a>
                     {% if user.is_authenticated %}
                      <!-- Profile Circle -->
+                      <a href="{% url 'ai_assistant:chat_page' %}">🤖</a><br>
                         <a href="{% url 'order:my_orders' %}"><div class="profile-icon">
                          {{ user.username|first|upper }}
                         </div></a>

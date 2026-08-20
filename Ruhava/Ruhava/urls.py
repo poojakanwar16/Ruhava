@@ -29,6 +29,7 @@ urlpatterns = [
     path('order/',include('order.urls')),
     path('account/', include('shop.urls')),
     path('shopkeeper/',include('shopkeeper.urls')),
+    path('ai_assistant/',include('ai_assistant.urls')),
     path('customer/',include('customer.urls')),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
