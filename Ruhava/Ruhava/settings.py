@@ -60,7 +60,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS=True
 
-ROOT_URLCONF = 'Ruhava.Ruhava.urls'
+ROOT_URLCONF = 'Ruhava.urls'
 
 LOGIN_URL = '/login/'
 
